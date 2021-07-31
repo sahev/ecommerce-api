@@ -8,7 +8,7 @@ export class ProductsDTO {
             prd_weight: number;
             prd_price: number;
             prd_discount: number;
-            prd_src: string;
-        }]
+        }],
+        pro_src: []
     }
 }

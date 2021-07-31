@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ProductsDTO } from './products.dto';
 import { Products } from './products.entity';
 import { ProductsService } from './products.service';
-import { _400 } from '../global/error'; 
+import { _400, _404 } from '../global/error'; 
 
 @Controller('products')
 export class ProductsController {
@@ -14,8 +14,8 @@ export class ProductsController {
   }
 
   @Get('/:id')
-  getProduct(@Param() param): Promise<Products> {    
-    return this.productsService.getProduct(param.id);
+  async getProduct(@Param() param): Promise<Products> {    
+    return await this.productsService.getProduct(param.id);
   }
 
   @Post()
@@ -30,8 +30,6 @@ export class ProductsController {
 
   @Delete('/:id')
   async removeProduct(@Param() param: any) {    
-    const remove = await this.productsService.removeProduct(param.id);
-    if (remove.affected == undefined)
-      throw _400('Product not exists')
+    await this.productsService.removeProduct(param.id);
   }
 }

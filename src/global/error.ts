@@ -1,11 +1,15 @@
-import { BadRequestException, UnauthorizedException } from "@nestjs/common"
+import { BadRequestException, NotFoundException, UnauthorizedException } from "@nestjs/common"
 
-function _400(error) {
+const _400 = (error) => {
     return new BadRequestException(error)
 }
 
-function _401(error) {
+const _401 = (error) => {
     return new UnauthorizedException(error)
 }
 
-export { _400, _401 };
+const _404 = (error) => {
+    return new NotFoundException(error)
+}
+
+export { _400, _401, _404 };
