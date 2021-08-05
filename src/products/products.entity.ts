@@ -3,7 +3,6 @@ import { Column, Entity, IsNull, ManyToMany, ManyToOne, OneToMany, PrimaryGenera
 @Entity() 
 export class Products {
     @PrimaryGeneratedColumn()
-    @OneToMany(() => ProductDetails, (productdetails) => productdetails.prd_product)
     pro_product: number;
 
     @Column()
@@ -18,24 +17,4 @@ export class Products {
     @Column("simple-array", { nullable: true })
     pro_src: Array<string>;
 
-}
-
-@Entity() 
-export class ProductDetails {
-    @PrimaryGeneratedColumn()
-    prd_productdetails: number;
-    
-    @Column()
-    @ManyToOne(() => Products, product => product.pro_product)
-    prd_product: number;
-
-    @Column()
-    prd_weight: number;
-    
-    @Column()
-    prd_price: number;
-    
-    @Column({nullable: true})
-    prd_discount: number;
-    
 }

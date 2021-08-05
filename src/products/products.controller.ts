@@ -14,18 +14,13 @@ export class ProductsController {
   }
 
   @Get('/:id')
-  async getProduct(@Param() param): Promise<Products> {    
+  async getProduct(@Param() param): Promise<ProductsDTO> {    
     return await this.productsService.getProduct(param.id);
   }
 
   @Post()
   async insertProduct(@Body() data: ProductsDTO): Promise<any> {    
     return await this.productsService.create(data);
-  }
-
-  @Post('/details')
-  async insertProductDetails(@Body() data: any): Promise<any> {    
-    return await this.productsService.insertProductDetails(data);
   }
 
   @Delete('/:id')
