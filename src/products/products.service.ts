@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { createQueryBuilder, getRepository, Repository } from 'typeorm';
+import { createQueryBuilder, getManager, getRepository, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductsDTO } from './products.dto';
 import { Products } from './products.entity';
@@ -16,8 +16,8 @@ export class ProductsService {
     @InjectRepository(ProductDetails) private productDetailsRepository: Repository<ProductDetails>,
     private productDetailsService: ProductDetailsService) { }
 
-  async getProducts(): Promise<Products[]> {
-    return await getRepository(Products).find();
+  async getProducts(): Promise<ProductsDTO[]> {
+    return await this.productsRepository.find({relations: ["pro_product"]})
   }
 
   async getProduct(id: number): Promise<ProductsDTO> {

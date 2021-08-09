@@ -9,7 +9,7 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Get()
-  getProducts(): Promise<Products[]> {
+  getProducts(): Promise<ProductsDTO[]> {
     return this.productsService.getProducts();
   }
 
@@ -19,7 +19,7 @@ export class ProductsController {
   }
 
   @Post()
-  async insertProduct(@Body() data: ProductsDTO): Promise<any> {    
+  async insertProduct(@Body() data: Products): Promise<any> {    
     return await this.productsService.create(data);
   }
 
